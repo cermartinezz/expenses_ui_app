@@ -1,0 +1,27 @@
+.sidebar {
+  @apply
+  fixed 
+  top-0 
+  left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0
+}
+
+.sidebar_menu {
+  @apply
+  h-full relative
+  px-3 py-16 
+  overflow-y-auto
+  bg-gray-50 
+  dark:bg-gray-800 
+}
+
+.sidebar_toggle_button {
+  @apply
+  hidden 
+  rounded-full p-1 px-2 
+  fixed top-5 right-[-10px] 
+  group-hover:block group-hover:animate-fade-in 
+  shadow-xl 
+  hover:border-2 border-gray-400
+  bg-gray-50
+  dark:bg-gray-800
+}
