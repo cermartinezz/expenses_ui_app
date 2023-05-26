@@ -1,5 +1,3 @@
 export default class Menu {
-  constructor(params) {
-    
-  }
-};
+	constructor(params) {}
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 import './../../css/menu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,9 +13,10 @@ import {
 	faScaleBalanced,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
+import { SidebarContext } from '../../context/SidebarContext';
 
 export default function Sidebar() {
-	const [open, toggleOpen, setOpen] = useToggle(true);
+	const { open, toggleOpen } = useContext(SidebarContext);
 
 	const [fontColor, setFontColor] = useState(() => {
 		return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -45,7 +46,7 @@ export default function Sidebar() {
 	}, []);
 
 	return (
-		<div className="hidden md:block">
+		<div className="hidden md:flex">
 			<aside
 				id="default-sidebar"
 				className={sidebar_class}
@@ -75,7 +76,7 @@ export default function Sidebar() {
 						</span>
 					</button>
 					<ul className="space-y-2 font-medium">
-						<li>
+						<li className="group/item relative w-full">
 							<a
 								href="/"
 								className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -90,6 +91,22 @@ export default function Sidebar() {
 									</span>
 								)}
 							</a>
+							<div
+								role="tooltip"
+								class="group-hover/item:opacity-100 
+									transition-opacity
+									bg-gray-800 px-1 
+									text-sm 
+									text-gray-100 
+									rounded-md 
+									absolute 
+									top-2.5
+									-right-24
+									opacity-0
+									"
+							>
+								Dashboard
+							</div>
 						</li>
 						<li>
 							<a

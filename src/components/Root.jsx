@@ -7,9 +7,13 @@ import TopBar from './Menu/TopBar';
 import Sidebar from './Menu/Sidebar';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
+import { SidebarContext } from '../context/SidebarContext';
+import { concatClassNames as cn } from '../helpers/concatClassNames';
+import { useToggle } from 'usehooks-ts';
 
 export default function Root() {
 	const [user, setUser] = useState(null);
+	const [open, toggleOpen, setOpen] = useToggle(true);
 
 	useEffect(() => {
 		if (!user) {
@@ -27,19 +31,28 @@ export default function Root() {
 						<div>
 							<TopBar />
 							<div>
-								<Sidebar />
-								<div className="p-4 md:ml-64">
-									<Routes>
-										<Route
-											path="/"
-											element={<Home />}
-										></Route>
-										<Route
-											path="*"
-											element={<NotFound />}
-										></Route>
-									</Routes>
-								</div>
+								<SidebarContext.Provider
+									value={{ open, toggleOpen, setOpen }}
+								>
+									<Sidebar />
+									<div
+										className={cn(
+											'p-4',
+											open ? 'md:ml-64' : 'md:ml-12'
+										)}
+									>
+										<Routes>
+											<Route
+												path="/"
+												element={<Home />}
+											></Route>
+											<Route
+												path="*"
+												element={<NotFound />}
+											></Route>
+										</Routes>
+									</div>
+								</SidebarContext.Provider>
 							</div>
 						</div>
 					) : (
